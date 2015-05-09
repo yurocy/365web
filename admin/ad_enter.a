@@ -1,0 +1,101 @@
+<!--#include file="../Conn.asp"-->
+<!--#include file="Admin_ChkPurview.asp"-->
+<!--#include file="../inc/function.asp"-->
+<%
+select case request("id")
+case "side"
+
+				Set rs = Server.CreateObject("ADODB.Recordset")
+				sql="select * from [web_ad] where web_adname='Side' "
+				rs.Open sql,conn,1,3
+				rs("web_info")=Request("content1")&"$@$@$@$"&Request("content2")
+				rs.Update
+				rs.Close
+				set rs=nothing
+				conn.Close
+				set conn=nothing
+				ad_src=replace(Request("content1")&"$@$@$@$"&Request("content2"),chr(34),chr(39))
+				ad_fg=split(ad_src,"$@$@$@$")
+				
+				
+				
+   filename=server.mappath("广告代码.txt")
+   set fs=server.CreateObject("Scripting.FileSystemObject")
+
+	if fs.fileexists(filename) then  
+	set file=fs.OpenTextFile(filename,1,False)
+	While Not File.AtEndOfStream
+	JsCode=JsCode & File.ReadLine&chr(10)
+	Wend
+	File.Close
+	
+		JsCode=replace(JsCode,"@左边广告@",ad_fg(0))
+		JsCode=replace(JsCode,"@右边广告@",ad_fg(1))		
+				
+				
+				
+				
+				
+				
+	
+		On Error Resume Next
+		JsFileName = Server.MapPath("/js/gg.js")
+	set objStream = Server.CreateObject("ADODB.Stream")
+	With objStream
+		.Open
+		.Type = 2
+		.Charset = "GB2312"
+		.WriteText JsCode
+		.SaveToFile JsFileName, 2
+		.Close
+	End With
+	Set objStream = Nothing	
+				
+				
+	response.write"<SCRIPT language=JavaScript>alert('成功修改对联');history.back();</SCRIPT>" 
+	response.end
+	else
+	response.write"<SCRIPT language=JavaScript>alert('修改对联失败');history.back();</SCRIPT>" 
+	response.end
+end if
+
+
+
+case "top"
+
+				Set rs = Server.CreateObject("ADODB.Recordset")
+				sql="select * from [web_ad] where web_adname='top' "
+				rs.Open sql,conn,1,3
+				rs("web_info")=Request("content1")
+				rs.Update
+				rs.Close
+				set rs=nothing
+				conn.Close
+				set conn=nothing
+					response.write"<SCRIPT language=JavaScript>alert('成功修改');history.back();</SCRIPT>" 
+	response.end
+	
+	
+	
+case else
+
+				Set rs = Server.CreateObject("ADODB.Recordset")
+				sql="select * from [web_ad] where web_adname='"&request("id")&"' "
+				rs.Open sql,conn,1,3
+				rs("web_info")=Request("content1")
+				rs.Update
+				rs.Close
+				set rs=nothing
+				conn.Close
+				set conn=nothing
+					response.write"<SCRIPT language=JavaScript>alert('成功修改');history.back();</SCRIPT>" 
+	response.end
+	
+	
+	
+end select
+
+
+%>
+
+

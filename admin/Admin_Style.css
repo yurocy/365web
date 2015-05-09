@@ -1,0 +1,81 @@
+BODY
+{
+	FONT-FAMILY: "ËÎÌו";
+	FONT-SIZE: 9pt;
+	text-decoration: none;
+	line-height: 150%;
+	background-color: #FBFDFF;
+	FONT-SIZE: 9pt;background:#CFDFEB;
+text-decoration: none;
+
+
+}
+TD
+{
+	FONT-FAMILY: "ËÎÌו";
+	FONT-SIZE: 9pt;
+}
+.Input
+{
+	FONT-SIZE: 9pt;
+        border: 1 solid #000000;
+        background-image: url('images/input_text1.gif')
+}
+.Input1
+{
+	FONT-SIZE: 9pt;
+        border: 1 solid #000000;
+        background-image: url('images/input_text2.gif')
+}
+.Input2
+{
+	FONT-SIZE: 9pt;
+        border: 1 solid #000000;
+}
+.Button
+{
+	FONT-SIZE: 9pt;
+	HEIGHT: 20px; 
+        background-color: #C3E8F8;
+        border-style: solid;
+        border-width: 1;
+        background-image: url('images/button_back.gif');
+}
+Select
+{
+	FONT-SIZE: 9pt;
+	HEIGHT: 20px;
+}
+A
+{
+	TEXT-DECORATION: none;
+	color: #000000;
+
+}
+A:hover
+{
+	COLOR: #428EFF;
+	text-decoration: underline;
+
+}
+.title
+{
+	background:url(Images/menu_button_bg.gif);
+}
+.border
+{
+	border: 1px solid #518BB6;
+}
+.tdbg{
+	background:#AFD3E7;
+	line-height: 120%;
+}
+.topbg
+{
+	background:url(Images/top_bg.gif);
+	color: #000000;
+
+}
+.bgcolor {
+	background-color: #AFD3E7;
+}

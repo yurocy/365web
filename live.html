@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>goal</title>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 12px;
+}
+body {
+	margin-top: 3px;
+}
+a:link {
+	color: #FF0000;
+	text-decoration: none;
+}
+a:visited {
+	color: #FF0000;
+	text-decoration: none;
+}
+a:hover {
+	color: #0000FF;
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style></head>
+
+<body>
+<span id="MaCenter"><span id="QiNum" style="float:left;padding-top:5px;"></span><span id="MsgBox" style="float:left;padding-top:5px;"></span><span style="float:left;"><span id="N4" index=""></span><span id="N5" index=""></span><span id="N6" index=""></span><span id="N7" index=""></span><span id="N8" index=""></span><span id="N9" index=""></span><span id="N10" index=""></span></span><span id="allCountText" style="float:left;padding-top:5px;font-size:14px;color: #0000ff;font-weight: bold;"></span><span id="msgTelText" style="color:#FF0000;float:left;padding-top:5px;"></span></span><span style="color:#FF0000;float:left;padding-top:5px;">&nbsp;&nbsp;<span id="showHistory">[<a href="javascript:openHistory();">历史回顾</a>]</span></span>
+<div id="playSound" style="display:none;"></div>
+<script language="JavaScript" type="text/javascript">
+//
+function openHistory(ID){
+	window.open('kjls.asp','','scrollbars=1,width=700,height=300,left='+(screen.width-622)/2+',top='+(screen.height-300)/2);
+}
+//
+var XmlDocVersion = new Array("MSXML4.DOMDocument", "MSXML3.DOMDocument", "MSXML2.DOMDocument", "MSXML.DOMDocument", "Microsoft.XmlDom");
+var XmlDoc = null;			//Dom
+var upXmlDoc =null;
+for(var i=0;i<XmlDocVersion.length;i++){
+	try{
+				
+		XmlDoc = new ActiveXObject(XmlDocVersion[i]);
+		upXmlDoc = new ActiveXObject(XmlDocVersion[i]);
+		break;
+	}
+	catch(e){		
+		XmlDoc = null;
+		upXmlDoc = null;
+		
+	}
+}
+
+if(XmlDoc == null){
+	//
+	alert('你的浏览器不支持XML组件，请安装XML组件或使用IE浏览器!');		
+}
+
+function $(ID){
+	return document.getElementById(ID);
+}
+//
+/*
+function LoadMain(){
+	XmlDoc.async = false;		//异步		
+	XmlDoc.load("kj.asp?"+Math.floor(Math.random()*1000000));
+	if(XmlDoc.readyState!=4) return false;
+	if(XmlDoc.xml=='') return false;
+	var root = XmlDoc.selectNodes("/root/R");
+	var M = root[0].getAttribute("M").split("^");
+	var vString ='';
+	vString +=M[0] +'期';
+	for(var i=4;i<10;i++){
+		var Arr =M[i];
+
+		$('N'+i).index=Arr;
+		
+		if(Arr!=''){			
+			$('N'+i).innerHTML ='<a href="http://www.9932888.com" target="_blank" title=\"www.9932888.com  提供\"><img src="images/'+M[13]+'/'+ Arr +'.gif" width="35" height="20" border="0"></a>';				
+		}
+	}
+	//
+	if(M[10]!=''){
+		$('N10').innerHTML ='<img src="images/add.gif" width="9" height="20"><a href="http://www.9932888.com" target="_blank" title=\"www.9932888.com  提供\"><img src="images/'+M[13]+'/'+ M[10] +'.gif" width="35" height="20" border="0"></a>';		
+		$('N10').index=M[10];
+		
+		var thisCount =0;
+		for(var ii=4;ii<11;ii++){
+			thisCount +=Number(M[ii]);
+		}
+		$('allCountText').innerHTML ='<a href="http://www.9932888.com" target="_blank" title=\"点击查看[往期记录]\" style="color:blue;">&nbsp;总分:'+ thisCount+'</a>';
+	}
+	//
+	//加载开赛信息
+	$('msgTelText').innerHTML ='&nbsp;&nbsp;'+M[0] +'期在'+M[1] +' ' +M[2] +' ' +M[3] +'&nbsp;开奖';
+	//
+		
+	reLoad();	
+}
+
+LoadMain();
+*/
+
+//加载更新
+var OldXmlDoc;
+function reLoad(){
+	upXmlDoc.load("kj.asp?"+Math.floor(Math.random()*1000000));
+	upXmlDoc.onreadystatechange=ActionUpdate;
+	window.setTimeout("reLoad()",5000);
+}
+
+//reLoad();
+
+ActionUpdate();
+
+reLoad();
+
+//加载
+var FlashSound="<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0' width='36' height='14' id='image1'><param name='movie' value='img/sound.swf'><param name='quality' value='high'><param name='wmode' value='transparent'></object>";
+//
+var SataeArr =new Array();
+SataeArr[0] ='<span style="color:#0000FF;">准备报码，请稍候...本页自动更新，无须手动刷新。</span>';
+SataeArr[1] ='<span style="color:#FF0000;">正在搅珠...</span>';
+SataeArr[2] ='<span style="color:#0000FF;">节目广告中...</span>';
+SataeArr[3] ='<span style="color:#0000FF;">主持人解说中...</span>';
+SataeArr[4] ='<span style="color:#FF0000;"></span>';
+SataeArr[5] ='<span style="color:#FF0000;"></span>';
+//
+function ActionUpdate(){
+	if(upXmlDoc.readyState!=4) return false;
+	if(upXmlDoc.xml=='') return false;
+	if(OldXmlDoc==upXmlDoc.xml) return false;
+	
+	var openCountTrue=false;
+	
+	var root = upXmlDoc.selectNodes("/root/R");
+	var Data =root[0].getAttribute("M");
+	if(Data!=''){
+		//		
+		//
+		$('MaCenter').style.display='';
+		$('showHistory').style.display='';
+		//
+		var M = Data.split("^");
+		//
+		if(Number(M[11])==5){
+			$('MaCenter').style.display='none';
+			$('showHistory').style.display='none';
+			return false;
+		}
+		//
+		$('MsgBox').innerHTML =SataeArr[Number(M[11])];		
+		//
+		
+		$('QiNum').innerHTML ='&nbsp;'+M[0]+'期 ';
+		
+		
+		var vString ='';
+		vString +=M[0] +'期';
+		for(var i=4;i<10;i++){
+			var Arr =M[i];
+			if($('N'+i).index!=Arr){
+				
+				if(Arr!=''){						
+					$('N'+i).innerHTML ='<a href="http://www.9932888.com" target="_blank" title=\"www.9932888.com  提供\"><img src="'+M[13]+'/'+ Arr +'.gif" width="35" height="20" border="0"></a>';				
+				}else{
+					$('N'+i).innerHTML='';
+				}
+				
+				$('N'+i).index=Arr;
+				//
+				//if($('playCh').checked==true) $('playSound').innerHTML =FlashSound;
+			}
+		}
+		//
+		if($('N10').index!=M[10]){
+			if(M[10]!=''){
+				
+				$('N10').innerHTML ='<img src="images/add.gif" width="9" height="20"><a href="http://www.9932888.com" target="_blank" title=\"www.9932888.com  提供\"><img src="'+M[13]+'/'+ M[10] +'.gif" width="35" height="20" border="0"></a>';		
+				//allCountText
+				
+				
+				//
+			}else{
+				$('N'+i).innerHTML ='';
+			}
+			$('N10').index=M[10];
+			
+			//
+			
+			//
+			//if($('playCh').checked==true) $('playSound').innerHTML =FlashSound;
+			
+		}
+		
+		var thisCount =0;
+		for(var ii=4;ii<11;ii++){
+			if(M[ii]!=''){
+				openCountTrue =true;
+				thisCount +=Number(M[ii]);
+			}
+			
+		}
+		
+		if(thisCount!=0){
+			//显示总分			
+			$('allCountText').innerHTML ='<a href="http://www.9932888.com" target="_blank" title=\"点击查看[往期记录]\"  style="color:blue;">&nbsp;总分:'+ thisCount+'</a>';
+		}			
+		
+		
+		
+		//加载开赛信息
+		$('msgTelText').innerHTML ='&nbsp;&nbsp;'+M[12] +'期在'+M[1]+M[2]+M[3] +'开奖';
+		//
+
+		if(openCountTrue ==false){
+			$('allCountText').innerHTML='';
+		}
+		
+	}else{
+		$('MaCenter').style.display='none';
+		$('allCountText').innerHTML='';		
+		
+		$('MsgBox').innerHTML =SataeArr[4];
+	}
+		
+
+	OldXmlDoc==upXmlDoc.xml;
+	
+
+}
+
+</script>
+<script language="JavaScript" type="text/javascript" src="WebTransfer.js"></script>
+</body>
+</html>

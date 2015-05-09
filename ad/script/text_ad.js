@@ -1,0 +1,25 @@
+var adinfo1=new Array(5);
+var adinfo2=new Array(5);
+
+adinfo1[1]='#';adinfo2[1]='<font color=red></font>';
+adinfo1[2]='#';adinfo2[2]='<font color=red></font>';
+adinfo1[3]='#';adinfo2[3]='<font color=red></font>';
+adinfo1[4]='#';adinfo2[4]='<font color=red></font>';
+adinfo1[5]='#';adinfo2[5]='<font color=red></font>';
+adinfo1[6]='#';adinfo2[6]='<font color=red>&nbsp;</font>';
+adinfo1[7]='#';adinfo2[7]='<font color=red></font>';
+adinfo1[8]='#';adinfo2[8]='<font color=red></font>';
+adinfo1[9]='#';adinfo2[9]='<font color=red>&nbsp;</font>';
+adinfo1[10]='#';adinfo2[10]='<font color=red></font>';
+adinfo1[11]='#';adinfo2[11]='<font color=red></font>';
+adinfo1[12]='#';adinfo2[12]='<font color=red></font>';
+adinfo1[13]='#';adinfo2[13]='<font color=red></font>';
+adinfo1[14]='#';adinfo2[14]='<font color=red></font>';
+adinfo1[15]='#';adinfo2[15]='<font color=red></font>';
+adinfo1[16]='#';adinfo2[16]='<font color=red></font>';
+adinfo1[17]='#';adinfo2[17]='<font color=red></font>';
+adinfo1[18]='#';adinfo2[18]='<font color=red></font>';
+adinfo1[19]='#';adinfo2[19]='<font color=red>&nbsp;</font>';
+adinfo1[20]='#';adinfo2[20]='<font color=red></font>';
+adinfo1[21]='#';adinfo2[21]='<font color=red>&nbsp;</font>';
+adinfo1[22]='#';adinfo2[22]='<font color=red></font>';

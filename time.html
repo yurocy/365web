@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312"/>
+<title>北京时间_标准时间_博讯网导航</title>
+<style>
+<!--
+a:link,a:visited,a:hover {text-decoration:none;}
+#clockspan,#lunarspan {cursor:default;}
+-->
+</style>
+</head>
+<body topmargin=0 marginheight=0 leftmargin=0 marginwidth=0 style='font-size:12px;background-color:F3F3F3;'>
+<span id="clock" onmouseover="document.all.lunar.style.display='block';this.style.display='none'"><font color="#000000"><span id="clockspan">日期</span></font></span><span id="lunar" onmouseout="this.style.display='none';document.all.clock.style.display='block'" style="display:none;"><font color="#000000" bgcolor="#ffffe6"><span id="lunarspan">农历</span></font>
+</span>
+<script type="text/javascript">
+<!--
+var oldTimeString="";
+renewClock();
+getlunar();
+
+function renewClock() {
+setTimeout("renewClock()",1*1000);
+theDate = new Date();
+var weeks=new Array("\u65E5","\u4E00","\u4E8C","\u4E09","\u56DB","\u4E94","\u516D");
+var col = ":";
+var year = theDate.getYear();
+var month = theDate.getMonth()+1;
+var day = theDate.getDate();
+var dow = theDate.getDay();
+var hrs  = theDate.getHours();
+var mins = theDate.getMinutes();
+var secs = theDate.getSeconds();
+if(hrs<=9)hrs="0"+hrs;
+if(mins<=9)mins="0"+mins;
+if(secs<=9)secs="0"+secs;
+var time_string = month+"\u6708"+day+"\u65e5 "+hrs+":"+mins+" \u661f\u671f"+weeks[dow];
+if (oldTimeString!=time_string){
+$("clockspan").innerHTML=time_string;
+oldTimeString=time_string;
+}
+}
+function getlunar() {
+setTimeout("getlunar()",1*1000);
+theDate = new Date();
+var arrLen=3;
+var sValue=0;
+var dayiy=0;
+var miy=0;
+var iyear=0;
+var dayim=0;
+var ymonths=new Array("30;29;30;29;30;29;30;29;30;30;29;30;30","29;29;30;29;29;30;29;30;30;30;29;30","30;29;29;30;29;29;30;29;30;30;29;30","30;30;29;29;30;29;29;30;29;30;29;30;30");
+var monthnormal="\u6B63\u6708||\u4E8C\u6708||\u4E09\u6708||\u56DB\u6708||\u4E94\u6708||\u516D\u6708||\u4E03\u6708||\u516B\u6708||\u4E5D\u6708||\u5341\u6708||\u5341\u4E00\u6708||\u5341\u4E8C\u6708";
+var month2006="\u6B63\u6708||\u4E8C\u6708||\u4E09\u6708||\u56DB\u6708||\u4E94\u6708||\u516D\u6708||\u4E03\u6708||\u95F0\u4E03\u6708||\u516B\u6708||\u4E5D\u6708||\u5341\u6708||\u5341\u4E00\u6708||\u5341\u4E8C\u6708";
+var month2009="\u6B63\u6708||\u4E8C\u6708||\u4E09\u6708||\u56DB\u6708||\u4E94\u6708||\u95F0\u4E94\u6708||\u516D\u6708||\u4E03\u6708||\u516B\u6708||\u4E5D\u6708||\u5341\u6708||\u5341\u4E00\u6708||\u5341\u4E8C\u6708";
+var Dn="\u521D\u4E00||\u521D\u4E8C||\u521D\u4E09||\u521D\u56DB||\u521D\u4E94||\u521D\u516D||\u521D\u4E03||\u521D\u516B||\u521D\u4E5D||\u521D\u5341||\u5341\u4E00||\u5341\u4E8C||\u5341\u4E09||\u5341\u56DB||\u5341\u4E94||\u5341\u516D||\u5341\u4E03||\u5341\u516B||\u5341\u4E5D||\u4E8C\u5341||\u5EFF\u4E00||\u5EFF\u4E8C||\u5EFF\u4E09||\u5EFF\u56DB||\u5EFF\u4E94||\u5EFF\u516D||\u5EFF\u4E03||\u5EFF\u516B||\u5EFF\u4E5D||\u4E09\u5341";
+
+var Ys=new Array(1138464000,1171728000,1202313600,1232899200);
+var Yn=new Array("\u4E19\u620C\u5E74","\u4E01\u4EA5\u5E74","\u620A\u5B50\u5E74","\u5DF1\u4E11\u5E74");
+var ss=parseInt(theDate.getTime()/1000);
+for (i=0;i<Ys.length;i++) 
+if (ss>=Ys[i]){ 
+iyear=i; 
+sValue=ss-Ys[i];
+} 
+dayiy=parseInt(sValue/86400)+1;
+var dpm=ymonths[iyear];
+dpm=dpm.split(";");
+var Mn=monthnormal;
+if (iyear==0) Mn=month2006;
+if (iyear==3) Mn=month2009;
+Mn=Mn.split("||");
+Dn=Dn.split("||"); 
+dayim=dayiy;
+var total=new Array(13);
+total[0]=parseInt(dpm[0]);
+for (i=1;i<dpm.length-1;i++) total[i]=parseInt(dpm[i])+total[i-1];
+for (i=dpm.length-1;i>0;i--)
+if (dayim>total[i-1]){
+dayim=dayim-total[i-1];
+miy=i;
+break;
+}
+theLunar = '\u519C\u5386'+Yn[iyear]+' '+Mn[miy]+Dn[dayim-1];
+$("lunarspan").innerHTML = theLunar;
+}
+function $(o){
+var o=document.getElementById(o)?document.getElementById(o):o;
+return o;
+}
+//-->
+</script>
+</body>
+</html>

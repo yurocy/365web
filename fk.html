@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>我要提交网站</title>
+<style type="text/css">
+ body {
+ font-size:9pt;
+ margin:0;
+ margin-top:1px;
+ }
+ .bg{
+  background:url(/images/formbg.gif) no-repeat left top;
+  }
+ .STYLE2 {
+  color: #FF0000
+  }
+ .input {
+  1px solid #7F9DB9; 
+  font-size:9pt;
+  color:#666666;
+  font-family:Arial,"宋体";
+  font-weight:bold;
+  }
+</style>
+</head>
+<body>
+<form action="url_submit.asp" method="post" style="margin:0px">
+  <table width="516" height="260" align="left" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+    <tr bgcolor="#FFFFFF">
+      <td width="50"></td>
+      <td align="center"><span class="STYLE2"><strong>×</strong></span> <a href="javascript:window.close();">关闭窗口</a></td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="100" align="right">分类：</td>
+      <td><select name="fl" class="dd01">
+          <option value="0">未分类</option>
+          <script language="JavaScript" type="text/javascript" src="fl.asp"></script>
+        </select></td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="100" class="w08"><div align="right">网名：</div></td>
+      <td width="75"><input name="Text1" type="text" class="dd01" id="Text1" size="10"></td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="100" class="w08"><div align="right">网址：</div></td>
+      <td width="150"><input name="Text2" type="text" class="dd01" id="Text2" size="25"></td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="100" class="w08"><div align="right">代理：</div></td>
+      <td width="150"><input name="Text3" type="text" class="dd01" id="Text3" size="25"></td>
+    </tr>
+	    <tr bgcolor="#FFFFFF">
+      <td width="100" class="w08"><div align="right">查账：</div></td>
+      <td width="150"><input name="Text4" type="text" class="dd01" id="Text4" size="25"></td>
+    </tr>
+	    <tr bgcolor="#FFFFFF">
+	      <td class="w08">&nbsp;</td>
+	      <td><span class="STYLE2">注意: 多个网址请用 ; 号隔开 </span></td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="180" colspan="2"><div align="center">
+          <input name="Submit" type="submit" class="dd01" value="提交">
+        </div></td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+      <td height="28" align="center" colspan="2">&nbsp;</td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

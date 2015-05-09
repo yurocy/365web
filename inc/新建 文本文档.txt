@@ -1,0 +1,95 @@
+<!--#include file="inc/md5.asp"-->
+<%function show_site(id)%>
+	<%
+
+        sql="select * from WebGoodSiteType_Class where Main_ID="&ID
+	set rs=server.createobject("adodb.recordset")
+	rs.open sql,conn,1,1
+        if rs.eof and rs.bof then
+	else
+        i=1
+        do while not rs.eof
+		%>
+
+		    <table class="biaogeyangshi3">
+      <tr>
+        <td class="biaogeyangshi1"><table>
+            <tr>
+              <td> <%=rs("Type_Class")%> </td>
+            </tr>
+          </table></td>
+		  <td class="biaogeyangshi2"><table class="tablemain">
+		  <%           dim RsMore
+			  sql="select * from WebGoodSite_Url where Class_ID="&rs("id")
+	      set RsMore=server.createobject("adodb.recordset")
+	      RsMore.open sql,conn,1,1
+		  total=RsMore.recordcount
+		  tmp_num=1
+              do while not RsMore.eof
+			  	if tmp_num=1 then response.write "<tr>"'"<td class=""biaogeyangshi2""><table class=""tablemain""> <tr>"
+	       %> 
+                   
+              <td>
+			  ======================================================
+			  <a target="_blank" href="<%=RsMore("Site_Url")%>" style='color: <%=RsMore("Font_Color")%>'><%=RsMore("Site_Title")%></a>
+			  ==========================================================
+			  <a href="#" onClick="return window.open('http://www.86suncity.com/')" onMouseMove="showb(this,'D9262e273_e177_4f6b_867f_abdb9d06233b')" onmouseleave="leave('D9262e273_e177_4f6b_867f_abdb9d06233b')"><font style='color:red;'>太阳城系列大全</font></a>
+              <div id="D9262e273_e177_4f6b_867f_abdb9d06233b" class="xialaqingdan" style=" position:absolute; display:none;" onMouseOver="on()" onmouseleave="this.style.display='none'" >
+                <ul>
+                  <li><a href="#" onClick="return window.open('http://www.86suncity.com/')" onMouseOver="this.offsetParent.className='hover'" onMouseOut="this.offsetParent.className=''">会员1</a></li>
+                  <li><a href="#" onClick="return window.open('https://www.33suncity.net/')" onMouseOver="this.offsetParent.className='hover'" onMouseOut="this.offsetParent.className=''">代理1</a></li>
+                </ul>
+              </div>
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  ==========================================================
+            </tr>
+			
+			<%if (tmp_num mod 7)=0 then
+			response.write "</tr> "
+			if tmp_num<total then 
+			response.write "<tr>"
+			end if
+			end if
+			%>
+			
+         
+		<% tmp_num=tmp_num+1
+		RsMore.movenext
+              loop
+              RsMore.close
+	      set RsMore=nothing
+		  
+		  %>
+		  <%if (total mod 7)>0 then
+
+		  for i=1 to 7-(total mod 7)%>
+		                <td>
+            </tr>
+		  
+		  <%next%>
+		  
+
+		  
+		  <%end if%>
+		  		</table></td>
+      </tr>
+</table>
+	    	  
+
+	<%
+		  	  rs.movenext
+        loop
+        end if
+        rs.close
+	set rs=nothing
+		  %>
+		
+	<%end function%>	
